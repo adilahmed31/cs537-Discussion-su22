@@ -66,10 +66,10 @@ make target
 ### Simple Example
 ```bash
 blah: blah.o
-	cc blah.o -o blah # Runs third
+	gcc blah.o -o blah # Runs third
 
 blah.o: blah.c
-	cc -c blah.c -o blah.o # Runs second
+	gcc -c blah.c -o blah.o # Runs second
 
 blah.c:
 	echo "int main() { return 0; }" > blah.c # Runs first
@@ -80,8 +80,8 @@ The following Makefile has three separate rules. When you run make `blah` in the
 - blah requires blah.o, so make searches for the blah.o target
 - blah.o requires blah.c, so make searches for the blah.c target
 - blah.c has no dependencies, so the echo command is run
-- The cc -c command is then run, because all of the blah.o dependencies are finished
-- The top cc command is run, because all the blah dependencies are finished
+- The gcc -c command is then run, because all of the blah.o dependencies are finished
+- The top gcc command is run, because all the blah dependencies are finished
 - That's it: blah is a compiled c program
 
 
@@ -124,11 +124,11 @@ We will be running it with the following options:
 
 ## Sanitizers
 
-Sanitizers are a set of tools to inject some checking instructions during the compilation. These instructions could provide warnings at the runtime.
+Sanitizers are a set of tools to inject some checking instructions during the compilation. These instructions could provide warnings at runtime.
 
 ### Memory Leak
 
-To detect memory leak, use `-fsanitize=address`:
+To detect memory leaks, use `-fsanitize=address`:
 
 ```console
 $ gcc -fsanitize=address -o leak leak.c
@@ -209,7 +209,7 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 
 ## Valgrind
 
-Valgrind could also be helpful for a memory leak. Different from sanitizers, valgrind does not require special compilation command.
+Valgrind could also be helpful for a memory leak. Different from sanitizers, valgrind does not require a special compilation command.
 
 ```console
 $ gcc -o leak1 leak1.c
@@ -240,7 +240,7 @@ Other possible memory leaks:
 
 - Orphaned memory locations: When a pointer is re-defined to point to a different memory location without freeing the first memory, that memory is now unreachable and cannot be freed.
 
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -261,7 +261,7 @@ int main() {
 ```
 
 - Not handling a pointer returned from a function could cause a memory leak.
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -277,7 +277,7 @@ int main() {
 }
 ```
 
-A more complete list of possible memory safety issues can be found [here][https://developer.ibm.com/articles/au-toughgame/]
+A more complete list of possible memory safety issues can be found [here](https://developer.ibm.com/articles/au-toughgame/)
 
 ## Debugging with GDB
 
@@ -330,3 +330,5 @@ Also, try the tools we discussed today. They could save you from a lot of hassle
 
 - [Cppreference](https://en.cppreference.com/w/c) is primary for C++ reference, but it also has pretty references for C (with examples!).
 - [This git tutorial](https://git-scm.com/docs/gittutorial) could be helpful if you are not familiar with git.
+- [This video](https://youtu.be/GqmQg-cszw4?t=2738) has a wealth of information about buffer overflows.
+- [Beej's Quick guide to GDB](https://beej.us/guide/bggdb/) may be a helpful reference for gdb.
