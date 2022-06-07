@@ -1,6 +1,6 @@
 # COMP SCI 537 Discussion Week 2
 
-# DISCLAIMER: Any code samples provided in the discussion are simply for illustration and do not meet project specifications or linting requirements. You may reuse this code freely but you are responsible to make the modifications required for it to meet the specs.
+## DISCLAIMER: Any code samples provided in the discussion are simply for illustration and do not meet project specifications or linting requirements. You may reuse this code freely but you are responsible to make the modifications required for it to meet the specs.
 
 ## Parsing arguments
 
