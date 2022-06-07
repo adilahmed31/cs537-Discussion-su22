@@ -4,9 +4,9 @@
 
 ## Parsing arguments
 
-In P1, you were asked to use some functions you may have been unfamiliar with such as `fgets` and `strncasecmp` in addition to new useful functons you discovered from the internet. 
+In P1, you were asked to use some functions you may have been unfamiliar with such as `fgets` and `strncasecmp` in addition to new useful functions (`isalnum`?) you may have discovered from the internet. 
 
-The most useful resoruce to learn more from a new function is the man pages. As an example, lets consider the `getopt` function for parsing arguments. 
+The most useful resource to learn about an in-built function is the function's man page. As an example, consider the `getopt` function for parsing arguments. 
 
 We can run `man getopt` to learn more about this function, and see the below output
 
@@ -23,9 +23,9 @@ SYNOPSIS
 ...
 ```
 
-As you may have noticed, the above function returns information about the `getopt` command and not the inbuilt function. We need to consult Section 3 (C Library functions) of the manual pages instead, by running `man 3 getopt`. To learn more about each section, check the manual of the man pages itself by running `man man`
+As you may have noticed, the above function returns information about the `getopt` command and not the in-built function. We need to consult Section 3 (C Library functions) of the manual pages instead, by running `man 3 getopt`. To learn more about each section, check the man page of the man pages itself by running `man man`.
 
-The following output is returned on viewing the man page for the `getopt` C library function:
+The man page for the `getopt` C library function looks like this:
 
 ```console
 GETOPT(3)                                   Linux Programmer's Manual                                   GETOPT(3)
@@ -59,7 +59,11 @@ SYNOPSIS
 
 ...
 ```
-We can that the function returns an integer value and also sets the value of global variables `optind`, `opterr`, `optopt` and `optagr`. Reading the description (omitted in the sample output above) tells us that the return value of the function is the character entered as an option, while `optind` returns the argument index and `optarg` returns the value of the argument when provided. Each option needs to be included in the `optstring` variable, with a trailing `:` for any flag that accepts as an argument. Using this, we can write a function to parse options as below:
+We can see that the function returns an integer value and also sets the value of global variables `optind`, `opterr`, `optopt` and `optagr`. 
+
+Reading the description (omitted in the sample output above) tells us that the return value of the function is the character entered as an option, while `optind` returns the argument index and `optarg` returns the value of the argument when provided. 
+Each option needs to be included in the `optstring` variable, with a trailing `:` for any flag that accepts as an argument. We also see that the function returns -1 when there are no more arguments to parse.
+Using this, we can write a function to parse options as below:
 
 
 ```c
@@ -117,7 +121,7 @@ $ make qemu-nox
 
 `-nox` here means no graphical interface, so it won't pop another window for xv6 console but directly show everything in your current terminal. The xv6 doesn't have a `shutdown` command; to quit from xv6, you need to kill the QEMU: press `ctrl-a` then `x`.
 
-After compiling and running xv6 in QEMU, you could play walk around inside xv6 by `ls`.
+After compiling and running xv6 in QEMU, you can walk around inside xv6 by `ls`.
 
 ```bash
 $ make qemu-nox
@@ -158,7 +162,7 @@ hello world
 ```
 
 ## Xv6 Syscalls
-We will explore main files required to do p1A. 
+We will explore the main files required to do P2A.
 
 - `Makefile`:
     -  `CPUS`: # CPUS for QEMU to virtualize (make it 1)
@@ -305,7 +309,7 @@ We will explore main files required to do p1A.
         }
         }
         ```
-    - `Note:` See how to identify which syscall to call and where is the return value for completed syscalls. This is the heart of P2.
+    - `Note:` See how to identify which syscall to call and where is the return value for completed syscalls. This is the heart of P2A.
 
 
 - `sysproc.c`:
