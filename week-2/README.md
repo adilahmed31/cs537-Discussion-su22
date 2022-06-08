@@ -98,6 +98,8 @@ The code provided in the repo provides an example based on project P1 (but does 
 
 ## Intro to Xv6
 
+This demo was heavily based on [this initial explanation of xv6 syscalls](https://www.youtube.com/watch?v=vR6z2QGcoo8&ab_channel=RemziArpaci-Dusseau) by Remzi, which you may be interested to watch.
+
 To get the source code, clone the git repo `https://github.com/mit-pdos/xv6-public`:
 
 ```bash
