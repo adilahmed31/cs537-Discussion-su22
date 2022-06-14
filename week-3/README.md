@@ -1,3 +1,6 @@
+# COMP SCI 537 Discussion Week 3
+
+## DISCLAIMER: Any code samples provided in the discussion are simply for illustration and do not meet project specifications or linting requirements. You may reuse this code freely but you are responsible to make the modifications required for it to meet the specs.
 ## xv6 and GDB
 To run xv6 with gdb: in one window
 
@@ -136,7 +139,7 @@ Continuing.
 
 
 ## Syscalls Recap 
-We will explore main files required to do p1b. 
+We will explore the main files required to do p1b. 
 
 - `Makefile`:
     -  `CPUS`: # CPUS for QEMU to virtualize (make it 1)
@@ -337,7 +340,7 @@ alias: shell built-in command
 $ which which
 which: shell built-in command
 ```
-### `fork`: So Is the Process Created
+### `fork`:
 
 The syscall `fork()` creates a copy of the current process. We call the original process "parent" and the newly created process "child". But how are we going to tell which is which if they are the same??? The child process will get the return value 0 from `fork` while the parent will get the child's pid as the return value.
 
