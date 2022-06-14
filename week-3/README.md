@@ -619,7 +619,7 @@ struct proc: child {  |   |                               <= child process (befo
 }
 ```
 
-Also, compared to the figure of what we want, it has a redudent file descriptor `3`. We should close it. The modified code should look like this:
+Also, compared to the figure of what we want, it has a redundant file descriptor `3`. We should close it. The modified code should look like this:
 
 ```C
 int pid = fork();
