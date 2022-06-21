@@ -1,6 +1,6 @@
 # COMP SCI 537 Discussion Week 4
 
-- [Recap]([https://github.com/akshatgit/CS537-Discussion-sp22-2/tree/main/week-3#how-xv6-starts](https://github.com/adilahmed31/cs537-Discussion-su22/tree/main/week-2)): xv6 syscalls. 
+- [Recap](https://github.com/adilahmed31/cs537-Discussion-su22/tree/main/week-2): xv6 syscalls. 
 - Today's discussion is based on an old discussion video by [Remzi](https://www.youtube.com/watch?v=eYfeOT1QYmg)
 
 ## How xv6 starts
