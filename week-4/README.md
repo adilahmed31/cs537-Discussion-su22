@@ -1,8 +1,11 @@
 # COMP SCI 537 Discussion Week 4
 
+- [Recap]([https://github.com/akshatgit/CS537-Discussion-sp22-2/tree/main/week-3#how-xv6-starts](https://github.com/adilahmed31/cs537-Discussion-su22/tree/main/week-2)): xv6 syscalls. 
+- Today's discussion is based on an old discussion video by [Remzi](https://www.youtube.com/watch?v=eYfeOT1QYmg)
+
 ## How xv6 starts
 
-All the C program starts with `main`, including an operating system:
+All C programs start with `main`, including an operating system:
 
 In `main.c`:
 
@@ -102,7 +105,7 @@ scheduler(void)
 <!-- `Note`: Your P3 will mainly revolve around scheduler code.  -->
 ## Scheduler Logic in xv6
 
-The most interesting piece is what inside the while-loop:
+The most interesting piece is what's inside the infinite loop:
 
 ```C
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
@@ -125,7 +128,7 @@ The most interesting piece is what inside the while-loop:
     }
 ```
 
-What it does is scanning through the ptable and find a `RUNNABLE` process `p`, then
+What it does is scan through the ptable and find a `RUNNABLE` process `p`, then
 
 1. set current CPU's running process to `p`: `c->proc = p`
 2. switch userspace page table to `p`: `switchuvm(p)`
@@ -190,7 +193,7 @@ struct proc {
 
 **What is the first user process that gets scheduled on the CPU?**  The `init` process. The `init` then forks a child `sh`, which runs the xv6 shell program. The `init` then waits on `sh`, and the `sh` process will at some timepoint be scheduled -- this is when you see that active xv6 shell prompting you for some input!
 
-[QUIZ] Before we finishing this section, consider this question: what is the current xv6's scheduling policy?
+[QUIZ] Before we finish this section, consider this question: what is the current xv6's scheduling policy?
 
 ## `sched()`: From User Process to Scheduler
 
@@ -280,7 +283,7 @@ It's unsurprising to see `sched()` gets called in these three cases... `exit()` 
 
 ## Timer Interrupt
 
-Scheduling will be less useful without considering timer interrupt. As you have seen in P1B, all the interrupts are handled in `trap.c: trap()`.
+Scheduling will be less useful without considering timer interrupts. As discussed in Week-2, all the interrupts are handled in `trap.c: trap()`.
 
 ```C
 struct spinlock tickslock;
@@ -329,3 +332,5 @@ There are two interesting things going on here:
 
 1. If it is a timer interrupt `case T_IRQ0 + IRQ_TIMER`: the global variable `ticks` gets incremented
 2. If it is a timer interrupt satisfying `myproc() && myproc()->state == RUNNING && tf->trapno == T_IRQ0+IRQ_TIMER`: call `yield()`, which then relinquish CPU and gets into scheduler
+
+The code then resumes execution as if it just returned from swtch.
