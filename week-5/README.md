@@ -48,7 +48,7 @@ The process B was alotted 4 ticks but gave up the CPU after running for 2 ticks,
 
 ## How xv6 starts
 
-All the C program starts with `main`, including an operating system:
+All C programs start with `main`, including an operating system:
 
 In `main.c`:
 
