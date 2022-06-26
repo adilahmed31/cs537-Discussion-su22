@@ -26,7 +26,7 @@ Now consider the following scheduler scenario:
 All the processes run for the number of ticks that they were alotted. Now, consider the scenario that a process does not run for its allotted time slice and gives up the CPU when it is sleeping (i.e. blocked on some other activity such as I/O). To incentivize processes giving up the CPU when they don't require it, we will compensate the number of slices for which the process is actively sleeping. Consider an extension of the previous scenario:
 
 | Time      | Process Scheduled | Sleeping |
-| ----------- | ----------- |
+| ----------- | ----------- | -----|
 | t = 1       | A|  - | 
 | t = 2       | A|  - |
 | t = 3       | A|  - |
