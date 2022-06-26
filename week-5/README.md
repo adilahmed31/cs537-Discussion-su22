@@ -40,7 +40,7 @@ All the processes run for the number of ticks that they were alotted. Now, consi
 | t = 11      | B|  - |
 | t = 12      | B|  - |
 | t = 13      | B|  - |  
-| t = 13      | B|  - |  
+| t = 14      | B|  - |  
 
 The process B was alotted 4 ticks but gave up the CPU after running for 2 ticks, and then slept for 1 tick. When it is scheduled again , it runs for 4 regular ticks plus 1 *compensatory* tick for a total of 5 ticks. Bear in mind that even though B ran for 2 ticks lesser than expected, it is only given 1 compensatory tick as it only spent 1 tick sleeping.
 
