@@ -1,4 +1,4 @@
-# COMP SCI 537 Discussion Week 4
+# COMP SCI 537 Discussion Week 5
 
 ## Compensated Round-Robin Scheduler
 Processes are assigned slices. The scheduler schedules the next process in the pool of READY processes in a round-robin manner. The process runs for the number of ticks defined by it's slice.
@@ -98,7 +98,7 @@ mpmain(void)
 }
 ```
 
-The `scheduler()` is a forever-loop that keeps picking the next process to run (defined in `proc.c`):
+The `scheduler()` is an infinite loop that keeps picking the next process to run (defined in `proc.c`):
 
 ```C
 // Per-CPU process scheduler.
@@ -148,7 +148,7 @@ scheduler(void)
 <!-- `Note`: Your P3 will mainly revolve around scheduler code.  -->
 ## Scheduler Logic in xv6
 
-The most interesting piece is what inside the while-loop:
+The most interesting piece is inside the infinite loop:
 
 ```C
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
@@ -171,7 +171,7 @@ The most interesting piece is what inside the while-loop:
     }
 ```
 
-What it does is scanning through the ptable and find a `RUNNABLE` process `p`, then
+What it does is scan through the ptable and find a `RUNNABLE` process `p`, then
 
 1. set current CPU's running process to `p`: `c->proc = p`
 2. switch userspace page table to `p`: `switchuvm(p)`
@@ -236,7 +236,7 @@ struct proc {
 
 **What is the first user process that gets scheduled on the CPU?**  The `init` process. The `init` then forks a child `sh`, which runs the xv6 shell program. The `init` then waits on `sh`, and the `sh` process will at some timepoint be scheduled -- this is when you see that active xv6 shell prompting you for some input!
 
-[QUIZ] Before we finishing this section, consider this question: what is the current xv6's scheduling policy?
+[QUIZ] Before we finish this section, consider this question: what is the current xv6's scheduling policy?
 
 ## `sched()`: From User Process to Scheduler
 
@@ -326,7 +326,7 @@ It's unsurprising to see `sched()` gets called in these three cases... `exit()` 
 
 ## Timer Interrupt
 
-Scheduling will be less useful without considering timer interrupts. As you have seen in P2, all the interrupts are handled in `trap.c: trap()`.
+Scheduling will be less useful without considering timer interrupts. As you have seen in P2A, all the interrupts are handled in `trap.c: trap()`.
 
 ```C
 struct spinlock tickslock;
@@ -376,7 +376,7 @@ There are two interesting things going on here:
 1. If it is a timer interrupt `case T_IRQ0 + IRQ_TIMER`: the global variable `ticks` gets incremented
 2. If it is a timer interrupt satisfying `myproc() && myproc()->state == RUNNING && tf->trapno == T_IRQ0+IRQ_TIMER`: call `yield()`, which then relinquish CPU and gets into scheduler
 
-## How to approach P2-A?
+## How to approach P3?
 - Implement easy syscalls first
 - - For e.g. Implement `setslice`, `getslice` and `fork2` first. 
 - Test each part independently. 
@@ -573,7 +573,7 @@ trap(struct trapframe *tf)
 }
 ```
 
-So what really happens is: a process that calls **`sleep()` syscall** will be wakened up every time that the global variable `ticks` changes. It then replies on the while loop in `sys_sleep()` to ensure it has slept long enough.
+So what really happens is: a process that calls **`sleep()` syscall** will be woken up every time the global variable `ticks` changes. It then replies on the while loop in `sys_sleep()` to ensure it has slept long enough.
 
 ```C
   while(ticks - ticks0 < n){
@@ -584,7 +584,7 @@ So what really happens is: a process that calls **`sleep()` syscall** will be wa
 
 This is not really a smart implementation of `sleep` syscall, because this process will jump between `RUNNABLE`, `RUNNING`, and `SLEEPING` back and forth until it sleeps long enough, which is inefficient and will mess up our compensation mechanism.
 
-To make it more efficient, you need to make `wakeup1()` smarter and treat a process that waits on `ticks` differently to avoid falsely wake up.
+To make it more efficient, you need to make `wakeup1()` smarter and treat a process that waits on `ticks` differently to avoid falsely waking up a process.
 
 For example, one implementation could be:
 
