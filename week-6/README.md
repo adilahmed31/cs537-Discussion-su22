@@ -5,7 +5,13 @@
 - How to approach P3
 - `sleep()`: is not really just sleeping
 
-This discussion is meant to be a quick QnA session / office hour. This page will be updated with the most commonly asked questions and their answers.
+## FAQs:
+
+- Should we use the pstat struct to make scheduling discussions or implement the logic?  
+Ans: That isn't necessary. The pstat struct is used for accounting and is meant to be cumulative over the lifetime of the process. You may add your own fields to other data structures such as ptable, cpu or proc. However, the fields in pstat must be kept up-to-date and accurate results must be returned in the getpinfo call.
+
+- Will we need to acquire locks for whichever data structure we create?  
+Ans: Yes. It's best to modify existing data structures and simply re-use the acquire and release routines in the existing code. 
 
 ## How to approach P3?
 - Implement easy syscalls first
