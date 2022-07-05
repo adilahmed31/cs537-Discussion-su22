@@ -5,6 +5,8 @@
 - How to approach P3
 - `sleep()`: is not really just sleeping
 
+This discussion is meant to be a quick QnA session / office hour. This page will be updated with the most commonly asked questions and their answers.
+
 ## How to approach P3?
 - Implement easy syscalls first
 - - For e.g. Implement `setslice`, `getslice` and `fork2` first. 
