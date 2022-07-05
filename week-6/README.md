@@ -3,7 +3,6 @@
 - [Recap](https://github.com/adilahmed31/cs537-Discussion-su22/tree/main/week-4#how-xv6-starts): How xv6 starts
 - [Recap](https://github.com/adilahmed31/cs537-Discussion-su22/tree/main/week-4#scheduler-logic-in-xv6): Scheduler Logic in xv6, old discussion video by [Remzi](https://www.youtube.com/watch?v=eYfeOT1QYmg)
 - How to approach P3
-- `sleep()`: is not really just sleeping
 
 ## FAQs:
 
