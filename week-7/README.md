@@ -1,6 +1,6 @@
 # COMP SCI 537 Discussion Week 7
 
-## `libpthread`: thread library in C`
+## `libpthread`: thread library in C
 
 POSIX.1 specifies a set of interfaces (functions, header files)
 for threaded programming commonly known as POSIX threads, or
@@ -39,7 +39,7 @@ Error handling macro
 #define Pthread_create(thread, attr, start_routine, arg) assert(pthread_create(thread, attr, start_routine, arg) == 0);
  ```
 
-What about attributes which we have convinently set as NULL? Mostly, we set them as NULL and let libpthread decide appropriate values for us.
+What about attributes which we have conveniently set as NULL? Mostly, we set them as NULL and let libpthread decide appropriate values for us.
                                                              
 Thread attributes:                                           
 
@@ -58,7 +58,7 @@ Thread attributes:
 ### Time to try them out.
 
 
-Step 1 : Compile programm for t0  
+Step 1 : Compile program for t0  
 
 `make t0`
 
@@ -107,7 +107,7 @@ void *mythread(void *arg)
    
 ```
 
-Step 1 : Compile programm for t1  
+Step 1 : Compile program for t1  
 
 `make t1`
 
@@ -166,13 +166,13 @@ Finally, when you are done with the mutex, you should destroy it.
 pthread_mutex_destroy(&mutex);
 ```
 
-After destroying the mutex, all calls to this mutex variable will fail. Sometimes it won't cause any problem without explicitly destroy it, but it is always a good practice to do so. See this [link](https://stackoverflow.com/questions/14721229/is-it-necessary-to-call-pthread-mutex-destroy-on-a-mutex) for more details.
+After destroying the mutex, all calls to this mutex variable will fail. Sometimes it won't cause any problems if you don't explicitly destroy it, but it is always a good practice to do so. See this [link](https://stackoverflow.com/questions/14721229/is-it-necessary-to-call-pthread-mutex-destroy-on-a-mutex) for more details.
 
 
 ## Condition Variable
 [Why is CV required?](https://stackoverflow.com/questions/12551341/when-is-a-condition-variable-needed-isnt-a-mutex-enough)
 
-Below are some functions (from the man page) that you may need to know for this project.
+Below are some functions (from the man page) that you may need to know for the next project.
 
 ```C
 #include <pthread.h>
@@ -221,9 +221,9 @@ To signal the waiting thread:
 pthread_cond_signal(&cond_var);
 ```
 
-Depends on your implementation, you may or may not acquire the mutex when signaling the condition variable.
+Depending on your implementation, you may or may not acquire the mutex when signaling the condition variable.
 
-Again, you should destroy the condition variable after done with it.
+Again, you should destroy the condition variable after you're done with it.
 
 ```C
 pthread_cond_destroy(&cond_var);
