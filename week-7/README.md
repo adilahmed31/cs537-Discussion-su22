@@ -117,7 +117,7 @@ Step 1 : Compile program for t1
 
 Step 2 : Run it.
 
-`./t1`
+`./t1 <loop count (int)>`
 
 ## Mutex
 (see `multi-threading.c`)
