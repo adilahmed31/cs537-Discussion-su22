@@ -58,7 +58,11 @@ Thread attributes:
 ### Time to try them out.
 
 
-Step 1 : Compile program for t0  
+Step 1 : Compile program for t0 using the makefile. If you view the makefile, you can observe that we need to add an extra flag `-pthread` when compiling a program that uses the threading library, as shown in the example below.
+
+`gcc -o t0 t0.c -Wall -pthread`
+
+In our case, since we have already created a makefile:
 
 `make t0`
 
