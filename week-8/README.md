@@ -4,9 +4,9 @@
 
 ## Map Reduce - What is it?
 
-MapReduce is a programming paradigm that makes programming large-scale parallel data processing tasks simple for developers. It makes programming such tasks easy for developers. Instead of worrying about parallelism, efficiency and other complexities - the developer just has to write some simple functions (as explained below) and the infrastructure handles the rest. 
+MapReduce is a programming paradigm that makes programming large-scale parallel data processing tasks simple for developers. Instead of worrying about parallelism, efficiency and other complexities - the developer just has to write some simple functions (as explained below) and the infrastructure handles the rest. 
 
-In this project, you will be implementing the MapReduce framework which is agnostic to the specific tasks to be performed. So in this scenario, you are not the developer running their data-processing tasks - you are the heroic systems expert who's making an easy-to-use **library** for the developer to run their tasks. So while the grateful developers who use your library and API will not have to worry about threads, locks and concurrency - you definitely will!
+In this project, you will be implementing the MapReduce framework itself. So in this scenario, you are not the developer running their data-processing tasks - you are the heroic systems expert who's making an easy-to-use **library** for the developer to run these tasks. So while the grateful developers who use your library and API will not have to worry about threads, locks and concurrency - you definitely will!
 
 First, let's break down what Map and Reduce really mean. The MapReduce paradigm states that computations can be programmed in a simple functional style consisting of a _Map_ and a _Reduce_ phase. 
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 ```
 
 * In the _Map_ function, we open each file and emit a key-value pair for each word found, where the key is the word itself and the value is the number "1" that represents one occurrence of the word being found.
-* In the _Reduce_ function, each of the key-value pairs generated is merged by adding all the values corresponding to a single key to obtain a key value pair where the key is the word itself and the value is the number of occurrences.
+* In the _Reduce_ function, the key-value pairs generated are merged by adding all the values corresponding to a single key to obtain a key value pair where the key is the word itself and the value is the number of occurrences.
 * The _MR_Run_ function specifies that we need to run 10 Map tasks (threads) and 10 Reduce tasks. Each mapper tasks emits its tokens to the same `hashmap`, hence designing this data structure is one of the main challenges of this project and an important step in our implementation.
 
 ![](Abstract.jpg)
@@ -63,9 +63,9 @@ int main(int argc, char *argv[]) {
 
 1. Each Mapper thread (M1 and M2 in figure) reads from a separate file. Say there are two threads and two files, then each thread will concurrently read data from 1 file assigned to it during the thread's creation. The filenames are passed as arguments to the main function, and eventually passed as function arguments to the mapper thread.
 
-2. Each mapper thread needs to store it's intermediate output in a data sructure where the corresponding reducer threads can find it. If we used one global data structure to store all intermediate key-value pairs, all the mappers would contend to obtain a lock on this data structure. This would reduce our parallel implementation to a sequential one. To avoid this, we use partitions. Each mapper thread (M1 and M2 in figure) produces intermediate output to all partitions. 
+2. Each mapper thread needs to store it's intermediate output in a data structure where the corresponding reducer threads can find it. If we used one global data structure to store all intermediate key-value pairs, all the mappers would contend to obtain a lock on this data structure. This would reduce our parallel implementation to a sequential one. To avoid this, we use partitions. Each mapper thread (M1 and M2 in figure) produces intermediate output to all partitions. 
 
-4. Now, we need a mechanism for the Mapper thread to know which partition to send a particular intermediate output to. For this, we use a partitioner function. The mapper thread will ask the partitioner function - say `MR_DefaultHashPartition`, to find the partition index of an input key. The partitioner function it returns an index corresponding to a key (For example, a word 'systems' is provided as a key to the function and it returns an index '5') . That index will determine the partition index for a particular input key. 
+4. Now, we need a mechanism for the Mapper thread to know which partition to send a particular intermediate output to. For this, we use a partitioner function. The mapper thread will ask the partitioner function - say `MR_DefaultHashPartition`, to find the partition index of an input key. The partitioner function returns an index corresponding to a key (For example, a word 'systems' is provided as a key to the function and it returns an index '5') . That index will determine the partition index for a particular input key. 
 
 Aside: Think about why we partition based on the key? What benefit do we get from storing all the key-value pairs for the same key in the same partition? (The answer is revealed later in this document)
 
@@ -87,11 +87,11 @@ Aside: Think about why we partition based on the key? What benefit do we get fro
 
 Now, let’s revisit our wordcount example and see how this abstraction works.
 
-Map phase : File F1 contains the single-letter words C, A, B, A and F2 has C, B, A, A. 
+Map phase : File F1 contains the single-letter words C, A, B, A and F2 contains the words C, B, A, A. 
 
 Thread M1 does the following tasks:
 - Reads all entries from F1.
-- For each input, it gets the index of each key(A, B or C) from MR_DefaultHashPartition to determine which partition the intermediate output is to be sent to. 
+- For each input, it gets the index of each key (A, B or C) from MR_DefaultHashPartition to determine which partition the intermediate output is to be sent to. 
 - The intermediate ouput is: (C, 1), (A,1 ), (B, 1), (A,1). These outputs are pushed to their corresponding paritions. Note that all entries of A are in partition P1, all entries of B and Care in partition P2.
 
 Sort phase : Simply sort all entries inside a partition. Note that all B’s are before C’s in partiion P2.
@@ -104,7 +104,7 @@ Reduce phase : Reducer thread will pick one key at a time and run the user-provi
 ## Partitioning
 
 What is a partition? Why is it needed?
-As mentioned earlier- if there are no partitions and all mappers write to a single list only, then the mappers’ execution becomes sequential because they’ll have to compete for taking a lock on that single list. Mapper threads will waste time waiting for that lock.
+As mentioned earlier- if there are no partitions and all mappers write to a single list, then the mappers’ execution becomes sequential because they’ll have to compete for taking a lock on that single list. Mapper threads will waste time waiting for that lock.
 
 So, to avoid sequentialization, we should have multiple lists. Each list can be seen as a partition which is accessed by all the mappers and reducers.
 
