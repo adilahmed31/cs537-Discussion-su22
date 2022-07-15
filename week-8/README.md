@@ -6,7 +6,7 @@
 
 MapReduce is a programming paradigm that makes programming large-scale parallel data processing tasks simple for developers. Instead of worrying about parallelism, efficiency and other complexities - the developer just has to write some simple functions (as explained below) and the infrastructure handles the rest. 
 
-In this project, you will be implementing the MapReduce framework itself. So in this scenario, you are not the developer running their data-processing tasks - you are the heroic systems expert who's making an easy-to-use **library** for the developer to run these tasks. So while the grateful developers who use your library and API will not have to worry about threads, locks and concurrency - you definitely will!
+In this project, you will be implementing the MapReduce framework itself. So in this scenario, you are not the developer running their data-processing tasks - you are the hero systems developer who's making an easy-to-use **library** for the developer to run these tasks. So while the grateful developers who use your library and API will not have to worry about threads, locks and concurrency - you definitely will!
 
 First, let's break down what Map and Reduce really mean. The MapReduce paradigm states that computations can be programmed in a simple functional style consisting of a _Map_ and a _Reduce_ phase. 
 
