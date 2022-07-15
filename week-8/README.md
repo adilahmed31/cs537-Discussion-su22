@@ -1,10 +1,6 @@
 # COMP SCI 537 Discussion Week 8
 
-The plan for this week:
-- Map Reduce - How to begin?
-- How to do partitioning?
-
-## Important: You must read the project spec carefully _before_ reading this guide. 
+## Important: This discussion write-up is intended to serve as a general guide to P4. You must read the project spec carefully _before_ reading this guide. 
 
 ## Map Reduce - What is it?
 
