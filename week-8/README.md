@@ -6,7 +6,7 @@
 
 MapReduce is a programming paradigm that makes programming large-scale parallel data processing tasks simple for developers. Instead of worrying about parallelism, efficiency and other complexities - the developer just has to write some simple functions (as explained below) and the infrastructure handles the rest. 
 
-In this project, you will be implementing the MapReduce framework itself. So in this scenario, you are not the developer running their data-processing tasks - you are the hero systems developer who's making an easy-to-use **library** for the developer to run these tasks. So while the grateful developers who use your library and API will not have to worry about threads, locks and concurrency - you definitely will!
+In this project, you will be implementing the MapReduce framework itself. So in this scenario, you are not the developer running their data-processing tasks - you are the hero systems developer who's making an easy-to-use **library** for others developers to run their tasks. So while the grateful developers who use your library and API will not have to worry about threads, locks and concurrency - you definitely will!
 
 First, let's break down what Map and Reduce really mean. The MapReduce paradigm states that computations can be programmed in a simple functional style consisting of a _Map_ and a _Reduce_ phase. 
 
@@ -79,7 +79,8 @@ Aside: Think about why we partition based on the key? What benefit do we get fro
 2. After this phase, we obtain internally sorted partitions to be consumed by reducer threads.
 
 Why do we need to sort?
-As the reducer thread is merging intermediate outputs based on keys, it needs to know when all key-value pairs with a common key have been processed. This is only possible if the pairs are sorted based on the key. When the reducer encounters a different key, it merges the outputs of the previous key and runs a new reducer function for the next key.
+
+* As the reducer thread is merging intermediate outputs based on keys, it needs to know when all key-value pairs with a common key have been processed. This is only possible if the pairs are sorted based on the key. When the reducer encounters a different key, it merges the outputs of the previous key and runs a new reducer function for the next key.
 
 ### Reduce Phase
 1. The number of reducer threads corresponds to the number of partitions.
