@@ -94,7 +94,7 @@ Thread M1 does the following tasks:
 - For each input, it gets the index of each key (A, B or C) from MR_DefaultHashPartition to determine which partition the intermediate output is to be sent to. 
 - The intermediate ouput is: (C, 1), (A,1 ), (B, 1), (A,1). These outputs are pushed to their corresponding paritions. Note that all entries of A are in partition P1, all entries of B and Care in partition P2.
 
-Sort phase : Simply sort all entries inside a partition. Note that all B’s are before C’s in partiion P2.
+Sort phase : Simply sort all entries inside a partition. Note that all B’s are before C’s in partition P2.
 
 Reduce phase : Reducer thread will pick one key at a time and run the user-provided reduction function on it. Note that reducer thread R2 will first pick key B, run reduction function on it and then pick key C and run reduction function on it. That’s why we have two ovals in R2 indicating that it picks one key at a time.
 
