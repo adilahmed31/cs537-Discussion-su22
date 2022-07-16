@@ -78,6 +78,9 @@ Aside: Think about why we partition based on the key? What benefit do we get fro
 
 2. After this phase, we obtain internally sorted partitions to be consumed by reducer threads.
 
+Why do we need to sort?
+As the reducer thread is merging intermediate outputs based on keys, it needs to know when all key-value pairs with a common key have been processed. This is only possible if the pairs are sorted based on the key. When the reducer encounters a different key, it merges the outputs of the previous key and runs a new reducer function for the next key.
+
 ### Reduce Phase
 1. The number of reducer threads corresponds to the number of partitions.
 
