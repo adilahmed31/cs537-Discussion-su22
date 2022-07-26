@@ -1,4 +1,4 @@
-# COMP SCI 537 Discussion Week 8
+# COMP SCI 537 Discussion Week 9
 
 ## Using GDB to debug concurrent code
 When running a concurrent program, it might be useful to observe what each individual thread is doing to debug a race condition or concurrency bug.
