@@ -3,7 +3,7 @@
 ## Using GDB to debug concurrent code
 When running a concurrent program, it might be useful to observe what each individual thread is doing to debug a race condition or concurrency bug.
 
-Consider the producer consumer program below. Sleep and printf statements have been added to slow the program down and to make debugging easier.
+Consider the producer consumer program below. `sleep` and `printf` statements have been added to slow the program down and to make debugging easier.
 
 ```c
 #include <assert.h>
