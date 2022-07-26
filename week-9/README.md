@@ -326,6 +326,17 @@ void MR_Run(int argc, char *argv[], Mapper map, int num_mappers,
 }
 ```
 
+As a sample, let's consider the single-file scenario and test our code's performance on one of the large files used for testing (available in the folder `/p/course/cs537-yuvraj/tests/p4/inputs`). Remember that this sample code does not use threads.
+
+```bash
+$ ./mapreduce file100m.in at
+** Map stage took 1.609 secs **
+** Sort stage took 8.955 secs **
+** Reduce stage took 0.807 secs **
+Found at 176400 times
+```
+
+Do the above results surprise you? What is the bottleneck here? What can we do to ease it?
 
 
 
