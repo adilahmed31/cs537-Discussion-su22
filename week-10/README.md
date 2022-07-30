@@ -237,7 +237,7 @@ struct ext2_inode {
 - i_block is where you copy data from.
 
 ## Reading Disk Image
-Now, how can one reach inodes?
+Now, how can one reach inodes? Using starter code. We suggest reading runscan.c before starting P5. This file shows how to browse through disk image and iterate over inodes using the read_inode function inside read_ex2.c. First off, we'll look at the read_inode function and observe what argument it takes and what it returns.
 We browse the ext2_super_block and find the inode table. Then browse through each inode entry one by one.
 
 ```C
