@@ -230,7 +230,7 @@ struct ext2_inode {
 	__u32	i_block[EXT2_N_BLOCKS];/* Pointers to blocks */
     ...
 };
-
+```
 - i_mode - An inode can represent a regular file, a directory, a symbolic link, and other file types. This variable represents field type. See S_ISDIR and S_ISREG functions to determine whether file is directory or regular file.
 - i_size stores size of the regular file.
 - i_links_count field identifies whether this inode is used or not. Since we need to copy deleted and undeleted files both, this field can be used as a mid-project checkpoint to first restore undeleted files and then deleted.
