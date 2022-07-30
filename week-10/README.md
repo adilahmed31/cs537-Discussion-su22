@@ -259,7 +259,7 @@ EXT2_NDIR_BLOCKS is 12. We've 12 direct pointers to data. For starters, you can 
 This file will be store in 12 direct pointers and can easily be restored by copying data from these blocks to your output directory. One easy way to do so is by opening a new file pointer(maybe in append mode?)
 with name "file-<inode_number>.jpg" and appending bytes from inode blocks to your file pointer.
 
-We will not create a huge file that uses the third indirect block. Thus, you don't have to read and parse the third indirect block and its sub-trees.
+Once you're able to restore files less than 12 KB in size, you can think about using indirect pointers. We will not create a huge file that uses the third indirect block. Thus, you don't have to read and parse the third indirect block and its sub-trees.
 Each block is of 1024 B. It is indexed with a 4 B block number. This gives 1024/4 = 256 pointers.
 
 ```C
@@ -269,6 +269,14 @@ for(unsigned int i=0; i<EXT2_N_BLOCKS; i++)
 	    printf("Block %2u : %u\n", i, inode->i_block[i]);
         .....
 ```
+
+### Exercise
+
+Can you see why we have whole hierarchy of single, double and triple indirect blocks? 
+If yes, what is the largest file size one can store with
+- just single indirect blocks?
+- single + double indirect blocks?
+- single + double + triple indirect blocks?
 
 ## Detecting JPEG images
 
