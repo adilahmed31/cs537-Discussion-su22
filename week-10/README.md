@@ -250,6 +250,7 @@ We browse the ext2_super_block and find the inode table. Then browse through eac
             printf("Is directory? %s \n Is Regular file? %s\n",
                 S_ISDIR(inode->i_mode) ? "true" : "false",
                 S_ISREG(inode->i_mode) ? "true" : "false");
+}
 ```
 
 ## Detecting JPEG images
