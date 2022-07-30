@@ -253,21 +253,6 @@ We browse the ext2_super_block and find the inode table. Then browse through eac
 }
 ```
 
-## Detecting JPEG images
-
-To detect inodes with images, scan all inodes that represent regular files and check if the first data block of the inode contains the jpg magic numbers: **FF D8 FF** E0 or **FF D8 FF** E1 or **FF D8 FF** E8.
-Notice last 3 possibilities are E0, E1 and E8 - which is what following code is looking for,
-
-```C
-int is_jpg = 0;
-if (buffer[0] == (char)0xff && buffer[1] == (char)0xd8 && buffer[2] == (char)0xff &&
-    (buffer[3] == (char)0xe0 || buffer[3] == (char)0xe1 || buffer[3] == (char)0xe8)) 
-{
-    is_jpg = 1;
-}
-```
-
-
 ## Copying Data from Blocks.
 
 EXT2_NDIR_BLOCKS is 12. We've 12 direct pointers to data. For starters, you can think about restoring/copying files which are less than 12 KB in size.
@@ -285,6 +270,19 @@ for(unsigned int i=0; i<EXT2_N_BLOCKS; i++)
         .....
 ```
 
+## Detecting JPEG images
+
+To detect inodes with images, scan all inodes that represent regular files and check if the first data block of the inode contains the jpg magic numbers: **FF D8 FF** E0 or **FF D8 FF** E1 or **FF D8 FF** E8.
+Notice last 3 possibilities are E0, E1 and E8 - which is what following code is looking for,
+
+```C
+int is_jpg = 0;
+if (buffer[0] == (char)0xff && buffer[1] == (char)0xd8 && buffer[2] == (char)0xff &&
+    (buffer[3] == (char)0xe0 || buffer[3] == (char)0xe1 || buffer[3] == (char)0xe8)) 
+{
+    is_jpg = 1;
+}
+```
 
 ### Directory entries in the inode table
 Directory entries in the inode table require special attention. To test if an inode refers to a directory file we can use the S_ISDIR(mode) macro:
