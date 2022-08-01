@@ -4,7 +4,7 @@ Primarily, this project is about iterating through inodes (using starter code), 
 
 ## Basics 
  In the following example, we have taken a 1.44MB floppy disk. We will use the same device in our examples later. 
-![alt text](pics/ext2.png)
+![alt text](https://github.com/adilahmed31/cs537-Discussion-su22/blob/main/week-10/pics/ext2.png)
 
 The first 1024 bytes of the disk, the "boot block", are reserved for the partition boot sectors and are unused by the Ext2 filesystem. The rest of the partition is split into block groups, each of which has the layout shown in the figure above. On a 1.44 MB floppy disk, there is only one block group. 
 
