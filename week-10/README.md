@@ -4,6 +4,7 @@ Primarily, this project is about iterating through inodes (using starter code), 
 
 ## Basics 
  In the following example, we have taken a 1.44MB floppy disk. We will use the same device in our examples later. 
+ 
 ![ext2](https://user-images.githubusercontent.com/10374171/182437949-5c0a9136-9a71-482d-bc02-005ed39d7e78.png)
 
 
@@ -116,7 +117,7 @@ Blocks are numbered starting from 1. Block 1 is the superblock of the first grou
 
 A bitmap is a sequence of bits. Each bit represents a specific block (blocks bitmap) or inode (inode bitmap) in the block group. A bit value of 0 indicates that the block/inode is free, while a value of 1 indicates that the block/inode is being used. A bitmap always refers to the block-group it belongs to, and its size must fit in one block. 
 
-![alt text](pics/ext2_bitmap.png)
+![ext2_bitmap](https://user-images.githubusercontent.com/10374171/182438066-e756ec51-5e80-4296-a4bd-b25da84bd909.png)
 
 Limiting the size of a bitmap to one block also limits the size of a block-group, because a bitmap always refers to the blocks/inodes in the group it belongs to. Consider the blocks bitmap: given a block size of 1024 bytes, and knowing that each byte is made of 8 bits, we can calculate the maximum number of blocks that the blocks bitmap can represent: 8 * 1024 = 8192 blocks. Therefore, 8192 blocks is the size of a block-group using a 1024-byte block size.
 
@@ -301,7 +302,9 @@ if (S_ISDIR(inode.i_mode))
 ```
 In the case of directory entries, the data blocks pointed by `i_block[]` contain a list of the files in the directory and their respective inode numbers. 
 
-![alt text](pics/dir_entry.png)
+
+![dir_entry](https://user-images.githubusercontent.com/10374171/182438146-c405a45f-6f8e-4011-a40f-8dabfd2901bb.png)
+
 
 The list is composed of `ext2_dir_entry_2` structures:
 
@@ -328,7 +331,8 @@ file_type	Description
 ```
 Each entry has a variable size depending on the length of the file name. The maximum length of a file name is `EXT2_NAME_LEN`, which is usually 255. The name_len field stores the length of the file name, while `rec_len` stores the total size of the entry and is used to locate the next entry in the list. 
 
-![alt text](pics/ext2_dir.png)
+![ext2_dir](https://user-images.githubusercontent.com/10374171/182438167-710506e2-47f8-42f1-ad02-f299fc374cd9.png)
+
 
  The following code reads the entries of a directory. Assume that the inode of the directory is stored in inode:
 
@@ -379,7 +383,9 @@ The desired file is hello.txt, while its path is /home/ealtieri/hello.txt.
 To find out the inode belonging to the file we first need to descend through its path, starting from the root directory, until we reach the file's parent directory. At this point we can locate the `ext2_dir_entry_2` entry corresponding to hello.txt and then its inode number.
 locate
 
-![alt text](pics/ext2_locate.png)
+
+![ext2_locate](https://user-images.githubusercontent.com/10374171/182438198-4fd47418-60a7-4935-9deb-b30a88293c54.png)
+
 
 
 Once the inode of the file is known, the data blocks belonging to the hello.txt are specified by the `inode.block[]` array.
