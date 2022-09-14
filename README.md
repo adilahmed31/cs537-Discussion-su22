@@ -7,3 +7,5 @@ Discussion section materials for COMP SCI 537 (Intro. to Operating Systems) Summ
 Instructor: Yuvraj Patel
 
 TA: Adil Ahmed
+
+Attribution: Re-used some material from past TAs: Akshat Sinha, Himanshu Sagar.
